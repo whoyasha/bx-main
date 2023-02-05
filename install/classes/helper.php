@@ -17,6 +17,12 @@ Class ModuleInstallHelper {
 				if ( $item_name == $name )
 					$settings = $item;
 			}
+			
+			$version_file = $_SERVER["DOCUMENT_ROOT"] . getLocalPath("modules/" . $MODULE_ID . "/install/version.php");
+			if ( file_exists( $version_file ) ) {
+				include ($version_file);
+
+			}
 		
 			$params = [
 				"MODULE_ID"          => $MODULE_ID,
@@ -24,8 +30,8 @@ Class ModuleInstallHelper {
 				"VENDOR"             => $VENDOR,
 				"AUTHORS"            => $items["authors"],
 				"MODULE_DESCRIPTION" => $settings["module_description"],
-				"MODULE_VERSION"     => "1.1.1",
-				"MODULE_VERSION_DATE"=> "2023-20-20",
+				"MODULE_VERSION"     => $arVersion["VERSION"],
+				"MODULE_VERSION_DATE"=> $arVersion["VERSION_DATE"],
 				"MODULE_PATH"        => getLocalPath("modules/" . $MODULE_ID),
 			];
 			
